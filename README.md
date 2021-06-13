@@ -22,7 +22,7 @@ NomadCoffee shares cafe information include location, photo, and categories.
 
 #### NomadCoffee Mobile Client
 
-- [ ] Assignment 11: #13.4 to #13.7 (June 15, 2021 6:00 AM (KST))
+- [x] Assignment 11: #13.4 to #13.7 (June 15, 2021 6:00 AM (KST))
 
 ### Task 1
 
