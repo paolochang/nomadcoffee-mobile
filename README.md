@@ -23,6 +23,7 @@ NomadCoffee shares cafe information include location, photo, and categories.
 #### NomadCoffee Mobile Client
 
 - [x] Assignment 11: #13.4 to #13.7 (June 15, 2021 6:00 AM (KST))
+- [x] Quiz 1: #13.0 to #13.3 (June 16, 2021 6:00 AM (KST))
 
 ### Task 1
 
@@ -157,3 +158,7 @@ Deploy your frontend to Netlify!
 - Create a React Native project using `expo-cli`
 - Write the code to preload fonts and images.
 - Preload `Ionicons`
+
+### Quiz 1
+
+- Take a quiz about `Expo` and `React Native CLI`
