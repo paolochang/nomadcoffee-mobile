@@ -1,22 +1,39 @@
 import React, { useState } from "react";
+import { useColorScheme } from "react-native";
 import AppLoading from "expo-app-loading";
-import { StatusBar } from "expo-status-bar";
+import { NavigationContainer } from "@react-navigation/native";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import { Asset } from "expo-asset";
-import { StyleSheet, Text, View, Image } from "react-native";
+import GeneralNav from "./src/navigators/GeneralNav";
+import { ApolloProvider } from "@apollo/client";
+import { ThemeProvider } from "styled-components";
+import client, { isLoggedInVar, tokenVar } from "./apollo";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { darkTheme, lightTheme } from "./theme";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const theme = useColorScheme();
   const onFinish = () => setLoading(false);
-  const preload = async () => {
+  const preloadAssets = async () => {
     const fontsToLoad = [Ionicons.font];
     const fontPromises = fontsToLoad.map((font: any) => Font.loadAsync(font));
-    const imagesToLoad = [require("./assets/m.png")];
+    const imagesToLoad = [require("./src/assets/m.png")];
     const imagePromises = imagesToLoad.map((image: any) =>
       Asset.loadAsync(image)
     );
     await Promise.all([fontPromises, imagePromises]);
+  };
+  const preload = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const theme = await AsyncStorage.getItem("darkMode");
+    // setDarkMode(theme);
+    if (token) {
+      isLoggedInVar(true);
+      tokenVar(token);
+    }
+    return preloadAssets();
   };
 
   if (loading) {
@@ -30,20 +47,12 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Image source={require("./assets/m.png")} />
-      <Text>Coffee</Text>
-      <Ionicons name="heart" color="tomato" size={25} />
-      <StatusBar style="auto" />
-    </View>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
+        <NavigationContainer>
+          <GeneralNav />
+        </NavigationContainer>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
