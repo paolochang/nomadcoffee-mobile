@@ -24,6 +24,7 @@ NomadCoffee shares cafe information include location, photo, and categories.
 
 - [x] Assignment 11: #13.4 to #13.7 (June 15, 2021 6:00 AM (KST))
 - [x] Quiz 1: #13.0 to #13.3 (June 16, 2021 6:00 AM (KST))
+- [x] Assignment 13: #14.0 to #15.4 (June 19, 2021 6:00 AM (KST))
 
 ### Task 1
 
@@ -162,3 +163,13 @@ Deploy your frontend to Netlify!
 ### Quiz 1
 
 - Take a quiz about `Expo` and `React Native CLI`
+
+### Task 13
+
+- Make a **Tab** navigation for the app (no need to log in)
+- The Tabs should be: `home`, `search` and `profile`
+- Set up Apollo Client (with Authentication logic) to be able to log the user in.
+- When the user goes to `profile` the user should see a **login** form.
+- After the user logs in, show the profile of the user.
+
+The goal is to be able to use the app even if we are logged out, to see coffees shops, but if we log in, we can see our profile.
