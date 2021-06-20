@@ -9,6 +9,7 @@ import SignUp from "../screens/SignUp";
 import Settings from "../screens/Settings";
 import { Ionicons } from "@expo/vector-icons";
 import ProfileEdit from "../screens/ProfileEdit";
+import PasswordEdit from "../screens/PasswordEdit";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ export type SharedStackParamList = {
   SignUp: undefined;
   Settings: undefined;
   ProfileEdit: undefined;
+  PasswordEdit: undefined;
 };
 
 interface ISharedStackNav {
@@ -42,21 +44,21 @@ export default function SharedStackNav({ screenName }: ISharedStackNav) {
         },
       }}
     >
-      {screenName === "Home" ? (
-        <Stack.Screen name={"Home"} component={Home} />
-      ) : null}
-      {screenName === "Search" ? (
+      {screenName === "Home" && <Stack.Screen name={"Home"} component={Home} />}
+      {screenName === "Search" && (
         <Stack.Screen name={"Search"} component={Search} />
-      ) : null}
-      {screenName === "Profile" ? (
+      )}
+      {screenName === "Profile" && (
         <Stack.Screen name={"Profile"} component={Profile} />
-      ) : (
+      )}
+      {screenName === "LogIn" && (
         <Stack.Screen name={"LogIn"} component={LogIn} />
       )}
       <Stack.Screen
         name={"SignUp"}
         component={SignUp}
         options={{
+          headerTitle: "Create an account",
           headerBackImage: ({ tintColor }) => (
             <Ionicons color={tintColor} name="close" size={28} />
           ),
@@ -75,6 +77,17 @@ export default function SharedStackNav({ screenName }: ISharedStackNav) {
         name={"ProfileEdit"}
         component={ProfileEdit}
         options={{
+          headerTitle: "Edit profile",
+          headerBackImage: ({ tintColor }) => (
+            <Ionicons color={tintColor} name="close" size={28} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name={"PasswordEdit"}
+        component={PasswordEdit}
+        options={{
+          headerTitle: "Change password",
           headerBackImage: ({ tintColor }) => (
             <Ionicons color={tintColor} name="close" size={28} />
           ),

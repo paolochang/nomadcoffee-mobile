@@ -38,6 +38,23 @@ const ProfileEdit: React.FC<Props> = ({ navigation }) => {
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
             <FormInput
+              placeholder="Name"
+              value={value}
+              onChangeText={(value) => onChange(value)}
+              onBlur={onBlur}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              hasError={false}
+            />
+          )}
+          name="name"
+          defaultValue=""
+        />
+        {errors.name && <FormErrorText message={errors.name.message} />}
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <FormInput
               placeholder="Email"
               value={value}
               onChangeText={(value) => onChange(value)}
@@ -91,7 +108,6 @@ const ProfileEdit: React.FC<Props> = ({ navigation }) => {
             />
           )}
           name="github_username"
-          rules={{}}
           defaultValue=""
         />
         {errors.github_username && (
