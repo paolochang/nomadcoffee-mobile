@@ -1,17 +1,26 @@
 import React, { useEffect } from "react";
-import { Text, TextInput } from "react-native";
 import { gql, useMutation } from "@apollo/client";
 import { useForm, Controller } from "react-hook-form";
 import AuthLayout from "../components/shared/AuthLayout";
-import { Button, FormInput } from "../components/shared/inputs";
+import { Button, FormErrorText, FormInput } from "../components/shared/inputs";
 import { logUserIn } from "../../apollo";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SharedStackParamList } from "../navigators/SharedStackNav";
 import { ORSeparator } from "../components/shared/common";
+import Logo from "../components/shared/Logo";
 import styled from "styled-components/native";
 
-const LoginText = styled.Text`
+const JoinWrapper = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+const JoinText = styled.Text`
+  font-size: 20px;
+  font-weight: 600;
   color: ${(props) => props.theme.fontColor};
+  margin-right: 10px;
 `;
 
 const LOGIN_MUTATION = gql`
@@ -59,6 +68,9 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
 
   useEffect(() => {
     console.log(`Login / useEffect`);
+    navigation.setOptions({
+      headerTitle: () => <Logo logoSize={26} />,
+    });
   }, []);
 
   const onValid = ({
@@ -80,7 +92,6 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
 
   return (
     <AuthLayout>
-      <LoginText>Please login</LoginText>
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
@@ -94,10 +105,19 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
           />
         )}
         name="username"
-        rules={{ required: true }}
+        rules={{
+          required: {
+            value: true,
+            message: "Username is required",
+          },
+          minLength: {
+            value: 6,
+            message: "Minimum length must be longer than 6 characters",
+          },
+        }}
         defaultValue=""
       />
-      {errors.username && <Text>This is required.</Text>}
+      {errors.username && <FormErrorText message={errors.username.message} />}
 
       <Controller
         control={control}
@@ -112,10 +132,19 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
           />
         )}
         name="password"
-        rules={{ required: true }}
+        rules={{
+          required: {
+            value: true,
+            message: "Password is required",
+          },
+          minLength: {
+            value: 7,
+            message: "Minimum length must be longer than 7 characters",
+          },
+        }}
         defaultValue=""
       />
-      {errors.username && <Text>This is required.</Text>}
+      {errors.password && <FormErrorText message={errors.password.message} />}
       <Button
         text="Log in"
         loading={loading}
@@ -123,12 +152,10 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
         onPress={handleSubmit(onValid)}
       />
       <ORSeparator />
-      <Button
-        text="Create account"
-        loading={false}
-        disabled={false}
-        onPress={() => navigation.navigate("SignUp")}
-      />
+      <JoinWrapper onPress={() => navigation.navigate("SignUp")}>
+        <JoinText>Join</JoinText>
+        <Logo logoSize={20} />
+      </JoinWrapper>
     </AuthLayout>
   );
 };

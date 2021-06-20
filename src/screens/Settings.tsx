@@ -1,9 +1,17 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import styled from "styled-components/native";
 import { logOutUser } from "../../apollo";
-import { Button } from "../components/shared/inputs";
 import { SharedStackParamList } from "../navigators/SharedStackNav";
+
+const SettingOption = styled.TouchableOpacity`
+  padding: 10px;
+`;
+const SettingText = styled.Text`
+  font-size: 18px;
+  font-weight: 600;
+`;
 
 type SettingsScreenNavigationProp = StackNavigationProp<
   SharedStackParamList,
@@ -21,13 +29,15 @@ const Settings: React.FC<Props> = ({ navigation }) => {
   };
   return (
     <View>
-      <Button
-        text="Edit Profile"
-        onPress={() => navigation.navigate("ProfileEdit")}
-        loading={false}
-        disabled={false}
-      />
-      <Button text="Logout" onPress={logout} loading={false} disabled={false} />
+      <SettingOption onPress={() => navigation.navigate("ProfileEdit")}>
+        <SettingText>Edit Profile</SettingText>
+      </SettingOption>
+      <SettingOption onPress={() => navigation.navigate("PasswordEdit")}>
+        <SettingText>Change Password</SettingText>
+      </SettingOption>
+      <SettingOption onPress={logout}>
+        <SettingText>Logout</SettingText>
+      </SettingOption>
     </View>
   );
 };

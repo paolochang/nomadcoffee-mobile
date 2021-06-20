@@ -13,7 +13,7 @@ const ORSeparatorContainer = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 20px 0px;
+  margin: 35px 0px;
   width: 100%;
   background-color: ${(props) => props.theme.backgroundColor};
 `;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SharedStackParamList } from "../navigators/SharedStackNav";
 import AuthLayout from "../components/shared/AuthLayout";
@@ -7,9 +7,19 @@ import { Button, FormInput, FormErrorText } from "../components/shared/inputs";
 import { ORSeparator } from "../components/shared/common";
 import { gql, useMutation } from "@apollo/client";
 import styled from "styled-components/native";
+import Logo from "../components/shared/Logo";
 
-const SignUpText = styled.Text`
+const HeaderContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+const JoinText = styled.Text`
+  font-size: 20px;
+  font-weight: 600;
   color: ${(props) => props.theme.fontColor};
+  margin-right: 10px;
 `;
 
 const CREATE_ACCOUNT_MUTATION = gql`
@@ -52,6 +62,17 @@ const SignUp: React.FC<Props> = ({ navigation }) => {
     },
   });
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: () => (
+        <HeaderContainer>
+          <JoinText>Join</JoinText>
+          <Logo logoSize={20} />
+        </HeaderContainer>
+      ),
+    });
+  }, []);
+
   const onValid = ({
     username,
     email,
@@ -75,7 +96,6 @@ const SignUp: React.FC<Props> = ({ navigation }) => {
 
   return (
     <AuthLayout>
-      <SignUpText>Create account</SignUpText>
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
