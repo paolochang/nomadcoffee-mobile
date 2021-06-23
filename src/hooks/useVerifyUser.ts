@@ -21,14 +21,6 @@ const useVerifyUser = () => {
   const hasToken = useReactiveVar(isLoggedInVar);
   const { data } = useQuery<IUser>(SEE_ME_QUERY, {
     skip: !hasToken,
-    onCompleted: (data) => {
-      console.log(`useVerifyUser / onCompleted`);
-      console.log(data);
-    },
-    onError: (error) => {
-      console.log(`useVerifyUser / onError`);
-      console.log(error);
-    },
   });
 
   useEffect(() => {

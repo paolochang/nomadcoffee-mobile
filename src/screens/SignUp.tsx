@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SharedStackParamList } from "../navigators/SharedStackNav";
-import AuthLayout from "../components/shared/AuthLayout";
-import { useForm, Controller } from "react-hook-form";
-import { Button, FormInput, FormErrorText } from "../components/shared/inputs";
-import { ORSeparator } from "../components/shared/common";
 import { gql, useMutation } from "@apollo/client";
+import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components/native";
+import { Button, FormInput, FormErrorText } from "../components/shared/inputs";
+import AuthLayout from "../components/shared/AuthLayout";
 import Logo from "../components/shared/Logo";
 
 const HeaderContainer = styled.View`
@@ -52,13 +51,7 @@ const SignUp: React.FC<Props> = ({ navigation }) => {
   } = useForm();
   const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTATION, {
     onCompleted: (data) => {
-      console.log(`createAccount / onCompleted`);
-      console.log(data);
       navigation.goBack();
-    },
-    onError: (error) => {
-      console.log(`createAccount / onError`);
-      console.log(error);
     },
   });
 
@@ -82,8 +75,6 @@ const SignUp: React.FC<Props> = ({ navigation }) => {
     email: string;
     password: string;
   }) => {
-    console.log(`SignUp / onValid`);
-    console.log(username, email, password);
     if (!loading)
       createAccount({
         variables: {

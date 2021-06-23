@@ -25,6 +25,7 @@ NomadCoffee shares cafe information include location, photo, and categories.
 - [x] Assignment 11: #13.4 to #13.7 (June 15, 2021 6:00 AM (KST))
 - [x] Quiz 1: #13.0 to #13.3 (June 16, 2021 6:00 AM (KST))
 - [x] Assignment 13: #14.0 to #15.4 (June 19, 2021 6:00 AM (KST))
+- [x] Assignment 14: #15.0 to #15.13 (June 24, 2021 6:00 AM (KST))
 
 ### Task 1
 
@@ -173,3 +174,14 @@ Deploy your frontend to Netlify!
 - After the user logs in, show the profile of the user.
 
 The goal is to be able to use the app even if we are logged out, to see coffees shops, but if we log in, we can see our profile.
+
+### Task 14
+
+Today we are gonna make the Home tab. The Home tab should show all the coffee shops in your Database.
+
+The features you have to implement are:
+
+- Infinite Scroll
+- Pull to Refresh
+
+The Coffee Shop component should display the name, photos and categories.
