@@ -1,14 +1,12 @@
-import { gql, useQuery } from "@apollo/client";
 import React, { useEffect } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import styled from "styled-components/native";
-import { logOutUser } from "../../apollo";
-import { Button } from "../components/shared/inputs";
-import BaseLayout from "../components/shared/BaseLayout";
-import useVerifyUser from "../hooks/useVerifyUser";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SharedStackParamList } from "../navigators/SharedStackNav";
+import { gql, useQuery } from "@apollo/client";
 import { Ionicons } from "@expo/vector-icons";
+import useVerifyUser from "../hooks/useVerifyUser";
+import styled, { useTheme } from "styled-components/native";
+import { TouchableOpacity } from "react-native";
+import BaseLayout from "../components/shared/BaseLayout";
 
 const ProfileHeader = styled.View`
   display: flex;
@@ -66,6 +64,7 @@ interface Props {
 
 const Profile: React.FC<Props> = ({ navigation }) => {
   const { data: userData } = useVerifyUser();
+  const theme = useTheme();
   const {
     data: profileData,
     loading,
@@ -74,14 +73,6 @@ const Profile: React.FC<Props> = ({ navigation }) => {
   } = useQuery(SEE_PROFILE_QUERY, {
     variables: {
       username: userData?.seeMe?.username,
-    },
-    onCompleted: (data) => {
-      console.log(`Profile / useQuery / onCompleted`);
-      console.log(data);
-    },
-    onError: (error) => {
-      console.log(`Profile / useQuery / onError`);
-      console.log(error);
     },
   });
 
@@ -93,14 +84,14 @@ const Profile: React.FC<Props> = ({ navigation }) => {
           style={{ marginRight: 10 }}
           onPress={() => navigation.navigate("Settings")}
         >
-          <Ionicons name="settings" size={24} color="black" />
+          <Ionicons name="settings" size={24} color={theme.fontColor} />
         </TouchableOpacity>
       ),
     });
   }, []);
 
   return (
-    <BaseLayout loading={false}>
+    <BaseLayout loading={loading}>
       {profileData && (
         <ProfileHeader>
           <Avatar source={{ uri: profileData.seeProfile.avatar_url }} />

@@ -50,8 +50,6 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
   } = useForm();
   const [login, { loading }] = useMutation(LOGIN_MUTATION, {
     onCompleted: (data: any) => {
-      console.log(`Login / useMutation / onCompleted`);
-      // console.log(data);
       const {
         login: { ok, error, token },
       } = data;
@@ -60,14 +58,9 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
       }
       if (token) logUserIn(token);
     },
-    onError: (error) => {
-      console.log(`Login / useMutation / onError`);
-      console.log(error);
-    },
   });
 
   useEffect(() => {
-    console.log(`Login / useEffect`);
     navigation.setOptions({
       headerTitle: () => <Logo logoSize={26} />,
     });
@@ -80,8 +73,6 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
     username: string;
     password: string;
   }) => {
-    console.log(`Login / onValidSubmit`);
-    console.log(username, password);
     login({
       variables: {
         username,

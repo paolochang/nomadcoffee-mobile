@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { useColorScheme } from "react-native";
 import AppLoading from "expo-app-loading";
-import { NavigationContainer } from "@react-navigation/native";
-import * as Font from "expo-font";
-import { Ionicons } from "@expo/vector-icons";
-import { Asset } from "expo-asset";
-import GeneralNav from "./src/navigators/GeneralNav";
 import { ApolloProvider } from "@apollo/client";
-import { ThemeProvider } from "styled-components";
 import client, { isLoggedInVar, tokenVar } from "./apollo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AppearanceProvider, useColorScheme } from "react-native-appearance";
+import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./theme";
+import { Asset } from "expo-asset";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
+import { NavigationContainer } from "@react-navigation/native";
+import GeneralNav from "./src/navigators/GeneralNav";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
-  const theme = useColorScheme();
+  const colorScheme = useColorScheme();
   const onFinish = () => setLoading(false);
   const preloadAssets = async () => {
     const fontsToLoad = [Ionicons.font];
@@ -27,8 +27,6 @@ export default function App() {
   };
   const preload = async () => {
     const token = await AsyncStorage.getItem("token");
-    const theme = await AsyncStorage.getItem("darkMode");
-    // setDarkMode(theme);
     if (token) {
       isLoggedInVar(true);
       tokenVar(token);
@@ -48,11 +46,13 @@ export default function App() {
 
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
-        <NavigationContainer>
-          <GeneralNav />
-        </NavigationContainer>
-      </ThemeProvider>
+      <AppearanceProvider>
+        <ThemeProvider theme={colorScheme === "dark" ? darkTheme : lightTheme}>
+          <NavigationContainer>
+            <GeneralNav />
+          </NavigationContainer>
+        </ThemeProvider>
+      </AppearanceProvider>
     </ApolloProvider>
   );
 }

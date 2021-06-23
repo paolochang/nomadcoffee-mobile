@@ -11,7 +11,6 @@ export const isLoggedInVar = makeVar<boolean>(false);
 export const tokenVar = makeVar<string | null>(null);
 
 const TOKEN = "token";
-const DARKMODE = "darkMode";
 
 export const logUserIn = async (token: string) => {
   await AsyncStorage.setItem(TOKEN, token);
@@ -26,6 +25,7 @@ export const logOutUser = async () => {
 };
 
 const httpLink = createHttpLink({
+  // uri: `http://localhost:4000/graphql`,
   uri: `https://paoloc-nomadcoffee-backend.herokuapp.com/graphql`,
 });
 
@@ -44,7 +44,8 @@ const client = new ApolloClient({
     typePolicies: {
       Query: {
         fields: {
-          seeFeed: {
+          // seeCoffeeShops: offsetLimitPagination(),
+          seeCoffeeShops: {
             keyArgs: false,
             merge(existing = [], incoming = []) {
               return [...existing, ...incoming];

@@ -1,5 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "styled-components/native";
 import Home from "../screens/Home";
 import LogIn from "../screens/LogIn";
@@ -7,14 +8,15 @@ import Profile from "../screens/Profile";
 import Search from "../screens/Search";
 import SignUp from "../screens/SignUp";
 import Settings from "../screens/Settings";
-import { Ionicons } from "@expo/vector-icons";
 import ProfileEdit from "../screens/ProfileEdit";
 import PasswordEdit from "../screens/PasswordEdit";
+import CoffeeShopEdit from "../screens/CoffeeShopEdit";
 
 const Stack = createStackNavigator();
 
 export type SharedStackParamList = {
   Home: undefined;
+  CoffeeShopEdit: { id: number };
   Search: undefined;
   Profile: undefined;
   LogIn: undefined;
@@ -93,6 +95,7 @@ export default function SharedStackNav({ screenName }: ISharedStackNav) {
           ),
         }}
       />
+      <Stack.Screen name="CoffeeShopEdit" component={CoffeeShopEdit} />
     </Stack.Navigator>
   );
 }

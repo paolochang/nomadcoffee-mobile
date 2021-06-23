@@ -1,14 +1,18 @@
-import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
-import { View } from "react-native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { SharedStackParamList } from "../navigators/SharedStackNav";
 import styled from "styled-components/native";
 import { logOutUser } from "../../apollo";
-import { SharedStackParamList } from "../navigators/SharedStackNav";
 
+const Container = styled.View`
+  flex: 1;
+  background-color: ${(props) => props.theme.backgroundColor};
+`;
 const SettingOption = styled.TouchableOpacity`
   padding: 10px;
 `;
 const SettingText = styled.Text`
+  color: ${(props) => props.theme.fontColor};
   font-size: 18px;
   font-weight: 600;
 `;
@@ -28,7 +32,7 @@ const Settings: React.FC<Props> = ({ navigation }) => {
     navigation.goBack();
   };
   return (
-    <View>
+    <Container>
       <SettingOption onPress={() => navigation.navigate("ProfileEdit")}>
         <SettingText>Edit Profile</SettingText>
       </SettingOption>
@@ -38,7 +42,7 @@ const Settings: React.FC<Props> = ({ navigation }) => {
       <SettingOption onPress={logout}>
         <SettingText>Logout</SettingText>
       </SettingOption>
-    </View>
+    </Container>
   );
 };
 

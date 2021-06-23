@@ -1,12 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
 import styled from "styled-components/native";
 
 export const Separator = styled.View`
   width: 36%;
   margin: 2px 10px;
   height: 1px;
-  background-color: ${(props) => props.theme.borderColorAccent};
+  background-color: ${(props) => props.theme.fontColor};
 `;
 
 const ORSeparatorContainer = styled.View`
@@ -18,7 +17,7 @@ const ORSeparatorContainer = styled.View`
   background-color: ${(props) => props.theme.backgroundColor};
 `;
 const ORSeparatorORText = styled.Text`
-  color: ${(props) => props.theme.borderColorAccent};
+  color: ${(props) => props.theme.fontColor};
   margin: 0px 15px;
   font-weight: 600;
 `;
