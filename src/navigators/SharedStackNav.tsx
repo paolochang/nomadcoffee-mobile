@@ -11,6 +11,7 @@ import Settings from "../screens/Settings";
 import ProfileEdit from "../screens/ProfileEdit";
 import PasswordEdit from "../screens/PasswordEdit";
 import CoffeeShopEdit from "../screens/CoffeeShopEdit";
+import CoffeeShopView from "../screens/CoffeeShopView";
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ export type SharedStackParamList = {
   Home: undefined;
   CoffeeShopEdit: { id: number };
   Search: undefined;
+  CoffeeShopView: { id: number };
   Profile: undefined;
   LogIn: undefined;
   SignUp: undefined;
@@ -96,6 +98,7 @@ export default function SharedStackNav({ screenName }: ISharedStackNav) {
         }}
       />
       <Stack.Screen name="CoffeeShopEdit" component={CoffeeShopEdit} />
+      <Stack.Screen name="CoffeeShopView" component={CoffeeShopView} />
     </Stack.Navigator>
   );
 }

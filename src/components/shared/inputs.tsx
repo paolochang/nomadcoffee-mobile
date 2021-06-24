@@ -5,7 +5,7 @@ import styled from "styled-components/native";
 export const Input = styled.TextInput`
   width: 100%;
   padding: 7px;
-  background-color: #fafafa;
+  background-color: ${(props) => props.theme.contentBackgroundColor};
   border: 0.5px solid ${(props) => props.theme.borderColor};
   border-radius: 3px;
   margin-top: 5px;
@@ -13,8 +13,10 @@ export const Input = styled.TextInput`
 `;
 
 export const FormInput = styled(Input)<{ hasError: Boolean }>`
+  background-color: ${(props) => props.theme.contentBackgroundColor};
   border: 1px solid
     ${(props) => (props.hasError ? "tomato" : props.theme.borderColor)};
+  color: ${(props) => props.theme.fontColor};
 `;
 
 const ButtonContainer = styled.TouchableOpacity`
