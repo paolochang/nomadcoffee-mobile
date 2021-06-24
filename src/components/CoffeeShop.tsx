@@ -144,14 +144,16 @@ const CoffeeShop: React.FC<IProp> = ({
           <CannotLoadText>Image cannot be loaded</CannotLoadText>
         </CannotLoadView>
       )}
-      <CategoriesView>
-        <CategoryTitle>Catetories: </CategoryTitle>
-        {categories.map((cat, index) => (
-          <CategoryView key={index}>
-            <CategoryText>{cat.name}</CategoryText>
-          </CategoryView>
-        ))}
-      </CategoriesView>
+      {categories !== undefined && (
+        <CategoriesView>
+          <CategoryTitle>Catetories: </CategoryTitle>
+          {categories.map((cat, index) => (
+            <CategoryView key={index}>
+              <CategoryText>{cat.name}</CategoryText>
+            </CategoryView>
+          ))}
+        </CategoriesView>
+      )}
     </Container>
   );
 };
