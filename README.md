@@ -27,3 +27,4 @@ NomadCoffee shares cafe information include location, photo, and categories.
 - [x] Assignment 13: #14.0 to #15.4 (June 19, 2021 6:00 AM (KST))
 - [x] Assignment 14: #15.0 to #15.13 (June 24, 2021 6:00 AM (KST))
 - [x] Assignment 15: #16.3 to #16.6 (June 26, 2021 6:00 AM (KST))
+- [x] Assignment 16: #17.0 to #17.16 (July 5, 2021 6:00 AM (KST))

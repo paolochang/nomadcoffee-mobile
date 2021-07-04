@@ -10,6 +10,12 @@ import { ORSeparator } from "../components/shared/common";
 import Logo from "../components/shared/Logo";
 import styled from "styled-components/native";
 
+const LoginText = styled.Text`
+  text-align: center;
+  font-size: 18px;
+  color: ${(props) => props.theme.fontColor};
+  margin-bottom: 20px;
+`;
 const JoinWrapper = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
@@ -83,6 +89,9 @@ const LogIn: React.FC<Props> = ({ navigation }) => {
 
   return (
     <AuthLayout>
+      <LoginText>
+        Join Nomad x Coffee to manage your favourite coffee shops
+      </LoginText>
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (

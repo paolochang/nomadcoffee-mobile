@@ -1,14 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TabIcon from "../components/nav/TabIcon";
-import Home from "../screens/Home";
-import Search from "../screens/Search";
-import Profile from "../screens/Profile";
+import { View } from "react-native";
 import SharedStackNav from "./SharedStackNav";
 import { useReactiveVar } from "@apollo/client";
 import { isLoggedInVar } from "../../apollo";
 import { useTheme } from "styled-components/native";
-import LogIn from "../screens/LogIn";
 
 const Tabs = createBottomTabNavigator();
 
@@ -46,6 +43,25 @@ const TabsNav = () => {
       >
         {() => <SharedStackNav screenName="Search" />}
       </Tabs.Screen>
+      {isLoggedIn ? (
+        <Tabs.Screen
+          name="Camera"
+          component={View}
+          listeners={({ navigation }) => {
+            return {
+              tabPress: (e) => {
+                e.preventDefault();
+                navigation.navigate("Upload");
+              },
+            };
+          }}
+          options={{
+            tabBarIcon: ({ focused, color, size }) => (
+              <TabIcon iconName={"camera"} color={color} focused={focused} />
+            ),
+          }}
+        />
+      ) : null}
       <Tabs.Screen
         name="Profile"
         options={{

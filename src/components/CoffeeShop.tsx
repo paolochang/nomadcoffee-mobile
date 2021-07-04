@@ -89,11 +89,11 @@ const CoffeeShop: React.FC<IProp> = ({
   is_mine,
   setIsOption,
 }) => {
-  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const theme = useTheme();
+  const { width: windowWidth } = useWindowDimensions();
   const headerHeight = useState<number>(latitude && longitude ? 60 : 40)[0];
   const [imageHeight, setImageHeight] = useState<number>(200);
-  const catHeight = useState<number>(50)[0];
+  const catHeight = useState<number>(categories !== undefined ? 50 : 0)[0];
   const [postHeight, setPostHeight] = useState<number>(
     headerHeight + imageHeight + catHeight
   );
